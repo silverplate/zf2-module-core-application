@@ -9,6 +9,7 @@ trait ExchangeArrayTrait
     /**
      * @throws \Exception
      * @return array
+     * @todo Why not use interface?
      */
     public static function getExchangeAttrs()
     {
