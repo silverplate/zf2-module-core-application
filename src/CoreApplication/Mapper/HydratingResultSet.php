@@ -23,4 +23,18 @@ class HydratingResultSet extends \Zend\Db\ResultSet\HydratingResultSet
 
         return $return;
     }
+
+    public function asJsonItems()
+    {
+        $items = [];
+
+        foreach ($this as $row) {
+            $items[] = [
+                'id' => $row->getId(),
+                'text' => $row->getTitle()
+            ];
+        }
+
+        return $items;
+    }
 }

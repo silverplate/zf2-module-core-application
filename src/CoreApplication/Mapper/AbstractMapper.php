@@ -296,8 +296,8 @@ implements ServiceLocatorAwareInterface
         $sql = $this->getSql();
         $select = $sql->select();
         $columns = $_onlyKey
-            ? (is_array($_onlyKey) ? $_onlyKey : array($_onlyKey))
-            : $this->getPri();
+                 ? (is_array($_onlyKey) ? $_onlyKey : array($_onlyKey))
+                 : $this->getPri();
 
         $select->columns($columns);
 
