@@ -14,20 +14,22 @@ trait ObjectTypeFeatureTrait
      */
     public function __construct($_objectTypeId = null)
     {
-        if ($_objectTypeId === null) {
-            $prototype = $this->getEntityPrototype();
-            $objectTypeId = $prototype->getObjectTypeId();
+        if ($_objectTypeId !== false) {
+            if ($_objectTypeId === null) {
+                $prototype = $this->getEntityPrototype();
+                $objectTypeId = $prototype->getObjectTypeId();
 
-        } else {
-            $objectTypeId = $_objectTypeId;
+            } else {
+                $objectTypeId = $_objectTypeId;
+            }
+
+            $this->setObjectTypeId($objectTypeId);
+
+            $this->featureSet = new FeatureSet;
+            $this->featureSet->addFeature(
+                new ObjectTypeFeature($this->getObjectTypeId())
+            );
         }
-
-        $this->setObjectTypeId($objectTypeId);
-
-        $this->featureSet = new FeatureSet;
-        $this->featureSet->addFeature(
-            new ObjectTypeFeature($this->getObjectTypeId())
-        );
 
         parent::__construct();
     }
