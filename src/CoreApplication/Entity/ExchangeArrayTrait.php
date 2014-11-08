@@ -24,18 +24,21 @@ trait ExchangeArrayTrait
      */
     public function exchangeArray(array $_data)
     {
-        foreach (static::getExchangeAttrs() as $name) {
-            if (strpos($name, 'is_') === 0) {
-                $method = String::upperCase($name, true);
+        foreach (static::getExchangeAttrs() as $_dataKey => $property) {
+            $dataKey = is_numeric($_dataKey) ? $property : $_dataKey;
+
+            if (strpos($property, 'is_') === 0) {
+                $method = String::upperCase($property, true);
             } else {
-                $method = 'set' . String::upperCase($name);
+                $method = 'set' . String::upperCase($property);
             }
 
             if (
-                array_key_exists($name, $_data) &&
+                array_key_exists($dataKey, $_data) &&
                 method_exists($this, $method)
             ) {
-                $this->$method($_data[$name] === '' ? null : $_data[$name]);
+                $value = $_data[$dataKey];
+                $this->$method($value === '' ? null : $value);
             }
         }
     }
