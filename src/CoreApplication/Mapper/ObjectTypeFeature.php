@@ -37,10 +37,15 @@ class ObjectTypeFeature extends Feature\AbstractFeature
         $this->_where($_delete);
     }
 
+    /**
+     * @param $_instance \Zend\Db\Sql\Select
+     */
     protected function _where($_instance)
     {
-        $_instance->where(array(
-            'object_type_id' => $this->_objectTypeId
-        ));
+        $table = $this->tableGateway->getTable();
+
+        $_instance->where([
+            "$table.object_type_id" => $this->_objectTypeId
+        ]);
     }
 }
