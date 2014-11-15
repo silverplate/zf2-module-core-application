@@ -418,4 +418,12 @@ implements ServiceLocatorAwareInterface
 
         return $data;
     }
+
+    /**
+     * @return \Zend\Db\Adapter\Adapter
+     */
+    public function getAdapter()
+    {
+        return parent::getAdapter();
+    }
 }
